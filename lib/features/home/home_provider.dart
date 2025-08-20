@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:grocery_shop_app/core/models/items.dart';
 import 'package:grocery_shop_app/core/utils/strings.dart';
 
-class HomeProvider extends ChangeNotifier {
+class HomeViewModel extends ChangeNotifier {
   List<Item> filteredItems = [];
   List<Item> cartItems = [];
   List<Item> itmes = [
@@ -57,19 +57,17 @@ class HomeProvider extends ChangeNotifier {
     ),
   ];
 
-  HomeProvider() {
+  HomeViewModel() {
     filteredItems = itmes;
   }
 
   void toggleItem(int index) {
     itmes[index].itemAdded = !itmes[index].itemAdded;
-    updateCart(index);
+    updateCart(itmes[index]);
     notifyListeners();
   }
 
-  void updateCart(int index) {
-    final item = itmes[index];
-
+  void updateCart(Item item) {
     if (item.itemAdded) {
       if (!cartItems.contains(item)) {
         cartItems.add(item);
@@ -79,6 +77,19 @@ class HomeProvider extends ChangeNotifier {
     }
 
     print("Cart Items Count: ${cartItems.length}");
+  }
+
+  void updateItemQuantity(Item item, int newQuantity) {
+    item.quantity = newQuantity;
+    notifyListeners();
+  }
+
+  double get totalAmount {
+    double total = 0.0;
+    for (var item in cartItems) {
+      total += item.price * item.quantity;
+    }
+    return total;
   }
 
   void filterCategories(String query) {

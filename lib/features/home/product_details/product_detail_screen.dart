@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_shop_app/core/models/items.dart';
 import 'package:grocery_shop_app/core/utils/colors.dart';
@@ -170,7 +171,7 @@ class ProductDetailScreen extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 10),
-                            // Other sections (Nutritions, Review)
+
                             ListTile(
                               title: const Text(
                                 'Nutritions',
@@ -270,7 +271,10 @@ class ProductDetailScreen extends StatelessWidget {
                           },
                         ),
                         IconButton(
-                          icon: const Icon(Icons.upload, color: Colors.black),
+                          icon: const Icon(
+                            CupertinoIcons.cloud_upload,
+                            color: Colors.black,
+                          ),
                           onPressed: () {
                             // TODO: Implement share functionality.
                           },

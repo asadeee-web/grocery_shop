@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+
 import 'package:grocery_shop_app/core/utils/colors.dart';
 import 'package:grocery_shop_app/core/utils/strings.dart';
 import 'package:grocery_shop_app/core/utils/textStyle.dart';
-import 'package:grocery_shop_app/features/home/home_screen.dart';
 import 'package:grocery_shop_app/features/root/root_screen.dart';
 import 'package:grocery_shop_app/widgets/custom_button.dart';
 
@@ -33,7 +32,7 @@ class LandingScreen extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              "Groceer gives you fresh vegetables and fruits,Order fresh items from Groceer.",
+              "Get fresh vegetables and fruits delivered to you. Order fresh items anytime.",
               textAlign: TextAlign.center,
               style: style16.copyWith(fontSize: 16, color: AppColors.lightGrey),
             ),

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:grocery_shop_app/core/models/items.dart';
 import 'package:grocery_shop_app/features/favourite/favourite_view_model.dart';
+import 'package:grocery_shop_app/features/home/home_provider.dart';
 import 'package:grocery_shop_app/features/home/product_details/product_detail_view_model.dart';
 
 import 'package:grocery_shop_app/features/landing/landing_screen.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         return MultiProvider(
           providers: [
             ChangeNotifierProvider(create: (_) => FavoriteViewModel()),
+            ChangeNotifierProvider(create: (_) => HomeViewModel()),
           ],
           child: GetMaterialApp(
             title: 'Grocery Shop App',

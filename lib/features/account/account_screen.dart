@@ -13,18 +13,16 @@ class AccountScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            // Profile Header
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Row(
                 children: [
-                  // Profile Image
                   CircleAvatar(
                     radius: 30,
                     backgroundImage: AssetImage(profileImage),
                   ),
                   const SizedBox(width: 12),
-                  // Name + Email
+
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

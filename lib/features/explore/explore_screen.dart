@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_shop_app/core/models/catogory.dart';
-import 'package:grocery_shop_app/core/utils/strings.dart';
+
 import 'package:grocery_shop_app/core/utils/textStyle.dart';
 import 'package:grocery_shop_app/features/explore/explore_view_model.dart';
 import 'package:grocery_shop_app/widgets/custom_explore_card.dart';
@@ -18,72 +17,73 @@ class ExploreScreen extends StatelessWidget {
         builder: (context, model, child) {
           return Scaffold(
             backgroundColor: Colors.white,
-            appBar: AppBar(
-              backgroundColor: Colors.white,
-              elevation: 0,
-              centerTitle: true,
-              title: const Text(
-                'Find Products',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
+            appBar: _appBar(),
             body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                children: [
-                  CustomSearchField(
-                    hintText: 'Search Products',
-                    onChanged: (value) {
-                      model.filterCategories(value);
-                    },
-                  ),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    CustomSearchField(
+                      hintText: 'Search Products',
+                      onChanged: (value) {
+                        model.filterCategories(value);
+                      },
+                    ),
 
-                  // Category grid
-                  Expanded(
-                    child:
-                        model.filteredCategories.isEmpty
-                            ? Center(
-                              child: Text(
-                                "No Categories Found",
-                                style: style16.copyWith(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            )
-                            : GridView.builder(
-                              padding: EdgeInsets.zero,
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    crossAxisSpacing: 16.0,
-                                    mainAxisSpacing: 16.0,
-                                    childAspectRatio: 0.85,
-                                  ),
-                              itemCount: model.filteredCategories.length,
-                              itemBuilder: (context, index) {
-                                final category =
-                                    model.filteredCategories[index];
-                                return ExploreCard(
-                                  imagePath: category.imageUrl,
-                                  title: category.name,
-                                  backgroundColor: category.backgroundColor,
-                                  onTap: () {
-                                    // Handle tap
-                                    print('Tapped on ${category.name}');
-                                  },
-                                );
-                              },
+                    // Category grid
+                    model.filteredCategories.isEmpty
+                        ? Center(
+                          child: Text(
+                            "No Categories Found",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
                             ),
-                  ),
-                ],
+                          ),
+                        )
+                        : GridView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          padding: EdgeInsets.zero,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 16.0,
+                                mainAxisSpacing: 16.0,
+                                childAspectRatio: 0.85,
+                              ),
+                          itemCount: model.filteredCategories.length,
+                          itemBuilder: (context, index) {
+                            final category = model.filteredCategories[index];
+                            return ExploreCard(
+                              imagePath: category.imageUrl,
+                              title: category.name,
+                              backgroundColor: category.backgroundColor,
+                              onTap: () {
+                                // Handle tap
+                                print('Tapped on ${category.name}');
+                              },
+                            );
+                          },
+                        ),
+                  ],
+                ),
               ),
             ),
           );
         },
+      ),
+    );
+  }
+
+  AppBar _appBar() {
+    return AppBar(
+      backgroundColor: Colors.white,
+      elevation: 0,
+      centerTitle: true,
+      title: const Text(
+        'Find Products',
+        style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
       ),
     );
   }

@@ -11,12 +11,4 @@ class CartProvider extends ChangeNotifier {
     cartItem.removeAt(index);
     notifyListeners();
   }
-
-  double get totalAmount {
-    double total = 0.0;
-    for (var item in cartItem) {
-      total += item.price;
-    }
-    return total;
-  }
 }
